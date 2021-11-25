@@ -307,6 +307,8 @@
                 dataType: "json" /*设置返回值类型为文本*/
             });
         });
+        
+        /*
         var gitalk = new Gitalk({
             clientID: '525d7f16e17aab08cef5',
             clientSecret: 'd1154e3aee5c8f1cbdc918b5c97a4f4157e0bfd9',
@@ -318,6 +320,7 @@
             distractionFreeMode: false
         })
         gitalk.render((document.getElementById('comments')))
+        */
     });
 </script>
 </body>
