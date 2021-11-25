@@ -1,0 +1,32 @@
+name: DockerImage
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号：'
+        required: true
+        default: '4.0.0'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '1.8'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvn -B package --file server/pom.xml
+        
+      - name: Publish to Registry latest
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: wanrenzhizun/fileview
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ github.event.inputs.version }}"
+          dockerfile: Dockerfile
