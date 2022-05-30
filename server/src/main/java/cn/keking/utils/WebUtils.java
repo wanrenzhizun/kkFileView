@@ -206,7 +206,7 @@ public class WebUtils {
         //每个键值为一组
         String[] arrSplit = strUrlParam.split("[&]");
         for (String strSplit : arrSplit) {
-            String[] arrSplitEqual = strSplit.split("[=]");
+            String[] arrSplitEqual = strSplit.split("[=]",2);
             //解析出header
             if (arrSplitEqual.length > 1
                     && arrSplitEqual[0].startsWith("header.")

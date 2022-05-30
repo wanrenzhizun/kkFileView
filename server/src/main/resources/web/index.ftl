@@ -36,14 +36,21 @@
                 成功实现：
                 <pre style="background-color: #2f332a;color: #cccccc">
                     var url = 'http://127.0.0.1:8080/file/test.txt'; //要预览文件的访问地址
-                    window.open('http://127.0.0.1:8012/onlinePreview?url='+encodeURIComponent(base64Encode(url)));
+                    window.open('http://127.0.0.1:8012/onlinePreview?url='+encodeURIComponent(Base64.encode(url)));
+                </pre>
+            </div>
+            <div>
+                如果你的项目需要携带header参数token进行访问，只需要如下代码即可成功实现：
+                <pre style="background-color: #2f332a;color: #cccccc">
+                    var url = 'http://127.0.0.1:8080/file/test.txt?header.token=B0EC3E3A01B8A92B2644B6709AA56159'; //要预览文件的访问地址
+                    window.open('http://127.0.0.1:8012/onlinePreview?url='+encodeURIComponent(Base64.encode(url)));
                 </pre>
             </div>
             <div>
                 新增多图片同时预览功能，接口如下：
                 <pre style="background-color: #2f332a;color: #cccccc">
                     var fileUrl =url1+"|"+"url2";//多文件使用“|”字符隔开
-                    window.open('http://127.0.0.1:8012/picturesPreview?urls='+encodeURIComponent(base64Encode(fileUrl)));
+                    window.open('http://127.0.0.1:8012/picturesPreview?urls='+encodeURIComponent(Base64.encode(fileUrl)));
                 </pre>
             </div>
         </div>
@@ -87,7 +94,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div class="loading_container">
@@ -184,8 +191,8 @@
                 dataType: "json" /*设置返回值类型为文本*/
             });
         });
-        
-       
+
+
     });
 </script>
 </body>
