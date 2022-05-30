@@ -5,9 +5,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Base64Utils;
 
 import javax.servlet.ServletRequest;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -184,5 +186,37 @@ public class WebUtils {
         } catch (MalformedURLException ignored) {
         }
         return null;
+    }
+
+
+    /**
+     * 通过参数设置请求服务器的请求头
+     *
+     * @param url           url
+     * @param attributeUrl  原url
+     * @author 胡照伦
+     * @date 2022-05-30
+     */
+    public static URLConnection setHeaderByParams(URL url, String attributeUrl) throws IOException {
+        String strUrlParam = truncateUrlPage(attributeUrl);
+        URLConnection connection = url.openConnection();
+        if (strUrlParam == null) {
+            return connection;
+        }
+        //每个键值为一组
+        String[] arrSplit = strUrlParam.split("[&]");
+        for (String strSplit : arrSplit) {
+            String[] arrSplitEqual = strSplit.split("[=]");
+            //解析出header
+            if (arrSplitEqual.length > 1
+                    && arrSplitEqual[0].startsWith("header.")
+                    && !arrSplitEqual[1].equals("")) {
+                //正确解析
+                connection.setRequestProperty(arrSplitEqual[0].replaceFirst("header.",""),
+                        arrSplitEqual[1]);
+            }
+        }
+        return connection;
+
     }
 }
