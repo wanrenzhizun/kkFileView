@@ -23,7 +23,7 @@ jobs:
         run: mvn -B package --file pom.xml
         
       - name: Publish to Registry latest
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: wanrenzhizun/fileview
           username: ${{ secrets.DOCKER_USERNAME }}
